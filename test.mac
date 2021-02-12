@@ -1,0 +1,22 @@
+       LODD 15
+       STOD 15
+label: ADDD 15
+       SUBD 15
+       JPOS label
+       JZER label
+       JUMP label
+       LOCO 15
+       LODL 15
+       ADDL 15
+       SUBL 15
+       JNEG label
+       JNZE label
+       CALL 15
+       PSHI
+       POPI
+       PUSH
+       POP
+       RETN
+       SWAP
+       INSP 15
+       DESP 15
