@@ -16,7 +16,7 @@ extern int yylex();
 extern int yylineno;
 extern char *yytext;
 
-int JUMP_OPCODES[] = {JZER_OPCODE, JNEG_OPCODE, JPOS_OPCODE, JUMP_OPCODE, JNEZ_OPCODE};
+int JUMP_OPCODES[] = {JZER_OPCODE, JNEG_OPCODE, JPOS_OPCODE, JUMP_OPCODE, JNZE_OPCODE};
 
 vector<string> lines;
 
@@ -52,10 +52,10 @@ int main(void)
                 else
                     operand = atoi(yytext);
 
-                lines.push_back(bitset<16>((opcode & INSTR_MASK) | operand).to_string());
+                lines.push_back(bitset<16>((short)(opcode) | operand).to_string());
             }
             else
-                lines.push_back(bitset<16>(opcode & INSTR_MASK).to_string());
+                lines.push_back(bitset<16>((short)opcode).to_string());
         }
 
         ntoken = yylex();

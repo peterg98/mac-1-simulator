@@ -1,0 +1,4 @@
+LOCO 45
+label: STOD 200
+       ADDD 200
+       JUMP label

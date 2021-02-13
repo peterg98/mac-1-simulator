@@ -50,7 +50,7 @@ INTEGER [0-9]+
 {A}{D}{D}{L}    {return ADDL_OPCODE;}
 {S}{U}{B}{L}    {return SUBL_OPCODE;}
 {J}{N}{E}{G}    {return JNEG_OPCODE;}
-{J}{N}{Z}{E}    {return JNEZ_OPCODE;}
+{J}{N}{Z}{E}    {return JNZE_OPCODE;}
 {C}{A}{L}{L}    {return CALL_OPCODE;}
 {P}{S}{H}{I}    {return PSHI_OPCODE;}
 {P}{O}{P}{I}    {return POPI_OPCODE;}

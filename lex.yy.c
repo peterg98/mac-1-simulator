@@ -884,7 +884,7 @@ YY_RULE_SETUP
 case 15:
 YY_RULE_SETUP
 #line 53 "scanner.l"
-{return JNEZ_OPCODE;}
+{return JNZE_OPCODE;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
