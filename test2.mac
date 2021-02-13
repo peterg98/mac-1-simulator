@@ -1,4 +1,5 @@
-LOCO 45
-label: STOD 200
-       ADDD 200
+LOCO 1
+label: 
+       STOD 1
+       ADDD 1
        JUMP label

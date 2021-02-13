@@ -14,19 +14,20 @@ using namespace std;
 
 extern int yylex();
 extern int yylineno;
+extern FILE *yyin;
+extern void yyrestart(FILE *);
 extern char *yytext;
 
 int JUMP_OPCODES[] = {JZER_OPCODE, JNEG_OPCODE, JPOS_OPCODE, JUMP_OPCODE, JNZE_OPCODE};
 
 vector<string> lines;
 
-int curr_lineno = 1;
-
 unordered_map<string, int> labels;
 
-int main(void)
+int parse_labels()
 {
     int ntoken;
+    int curr_lineno = 1;
 
     ntoken = yylex();
     while (ntoken)
@@ -36,9 +37,36 @@ int main(void)
             labels[string(yytext).substr(0, strlen(yytext) - 1)] = curr_lineno;
         }
         else if (ntoken == NEWLINE)
-            curr_lineno++;
-        else
         {
+            curr_lineno++;
+        }
+
+        ntoken = yylex();
+    }
+    return 0;
+}
+
+int main(int argc, char **argv)
+{
+    yyin = fopen(argv[1], "r");
+    int ntoken;
+    int curr_lineno = 1;
+
+    parse_labels();
+
+    yyrestart(fopen(argv[1], "r"));
+
+    ntoken = yylex();
+    while (ntoken)
+    {
+        switch (ntoken)
+        {
+        case LABEL:
+            break;
+        case NEWLINE:
+            curr_lineno++;
+            break;
+        default:
             int opcode = ntoken;
             if (opcode <= CALL_OPCODE || (opcode >= INSP_OPCODE))
             {

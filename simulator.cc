@@ -22,7 +22,7 @@ struct instruction
     short opcode, value;
 };
 
-const short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE, RETN_OPCODE};
+const short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE};
 
 instruction parse_instruction(short n)
 {
@@ -229,9 +229,9 @@ int simulate()
     return 0;
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
-    ifstream src("./machine-code");
+    ifstream src(argv[1]);
 
     string line;
     while (getline(src, line))
