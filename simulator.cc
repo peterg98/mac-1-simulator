@@ -68,27 +68,27 @@ short subtract(short x, short offset = 0)
 
 short jump_positive(short x)
 {
-    return accumulator >= 0 ? program_counter = x : program_counter;
+    return accumulator >= 0 ? program_counter = x-1 : program_counter;
 }
 
 short jump_zero(short x)
 {
-    return accumulator == 0 ? program_counter = x : program_counter;
+    return accumulator == 0 ? program_counter = x-1 : program_counter;
 }
 
 short jump_negative(short x)
 {
-    return accumulator < 0 ? program_counter = x : program_counter;
+    return accumulator < 0 ? program_counter = x-1 : program_counter;
 }
 
 short jump_nonzero(short x)
 {
-    return accumulator != 0 ? program_counter = x : program_counter;
+    return accumulator != 0 ? program_counter = x-1 : program_counter;
 }
 
 short jump(short x)
 {
-    return program_counter = x;
+    return program_counter = x-1;
 }
 
 short load_constant(short x)
@@ -100,7 +100,7 @@ short call_procedure(short x)
 {
     stack_pointer -= 1;
     memory[stack_pointer] = program_counter;
-    return program_counter = x;
+    return program_counter = x-1;
 }
 
 void push(bool indirect = false)
@@ -218,12 +218,12 @@ int simulate()
             cout << "Unknown instruction: " << instr.value << endl;
         }
 
+        cout << "ac<-" << accumulator << ", sp<-" << stack_pointer << ", pc<-" << program_counter << endl;
+
         if (find(begin(NON_PC_INCR), end(NON_PC_INCR), instr.opcode) == end(NON_PC_INCR))
         {
             program_counter++;
         }
-
-        cout << "ac<-" << accumulator << ", sp<-" << stack_pointer << ", pc<-" << program_counter << endl;
     }
 
     return 0;

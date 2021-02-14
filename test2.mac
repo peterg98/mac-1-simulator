@@ -1,5 +1,8 @@
-LOCO 1
-label: 
-       STOD 1
-       ADDD 1
-       JUMP label
+JUMP start
+proc: LOCO 7
+      LOCO 23
+      RETN
+start: LOCO 3
+       LOCO 10
+       CALL proc
+       LOCO 35

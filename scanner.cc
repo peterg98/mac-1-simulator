@@ -18,7 +18,7 @@ extern FILE *yyin;
 extern void yyrestart(FILE *);
 extern char *yytext;
 
-int JUMP_OPCODES[] = {JZER_OPCODE, JNEG_OPCODE, JPOS_OPCODE, JUMP_OPCODE, JNZE_OPCODE};
+int JUMP_OPCODES[] = {JZER_OPCODE, JNEG_OPCODE, JPOS_OPCODE, JUMP_OPCODE, JNZE_OPCODE, CALL_OPCODE};
 
 vector<string> lines;
 
