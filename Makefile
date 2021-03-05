@@ -2,7 +2,7 @@ CC=g++
 
 build: scanner.cc lex.yy.c
 	$(CC) scanner.cc lex.yy.c -o translator
-	./translator test2.mac
+	./translator test1.mac
 	$(CC) simulator.cc -o simulator
 	
 lex.yy.c: scanner.l

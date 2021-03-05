@@ -1,7 +1,7 @@
 JUMP start
-proc: LOCO 7
-      LOCO 23
-      RETN
+proc:  LOCO 7
+       LOCO 23
+       RETN
 start: LOCO 3
        LOCO 10
        CALL proc

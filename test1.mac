@@ -11,7 +11,7 @@ label: ADDD 15
        SUBL 15
        JNEG label
        JNZE label
-       CALL 15
+       CALL label
        PSHI
        POPI
        PUSH
