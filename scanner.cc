@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 #include <vector>
 #include <fstream>
 #include <iterator>
@@ -46,15 +48,14 @@ int parse_labels()
     return 0;
 }
 
-int main(int argc, char **argv)
-{
-    yyin = fopen(argv[1], "r");
+void scan(string in) {
+    yyin = fopen(in.c_str(), "r");
     int ntoken;
     int curr_lineno = 1;
 
     parse_labels();
 
-    yyrestart(fopen(argv[1], "r"));
+    yyrestart(fopen(in.c_str(), "r"));
 
     ntoken = yylex();
     while (ntoken)
@@ -89,9 +90,26 @@ int main(int argc, char **argv)
         ntoken = yylex();
     }
 
-    ofstream output_file("./machine-code");
+    filesystem::path input_path(in);
+    string output = input_path.stem();
+
+    char buf[128];
+    sprintf(buf, "out/%s", output.c_str());
+    ofstream output_file(buf);
     ostream_iterator<string> output_iterator(output_file, "\n");
     copy(lines.begin(), lines.end(), output_iterator);
+
+    lines.clear();
+    labels.clear();
+}
+
+int main(int argc, char **argv)
+{
+    string input_dir = "in";
+
+    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+        scan(entry.path());
+    }
 
     return 0;
 }

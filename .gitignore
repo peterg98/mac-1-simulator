@@ -1,5 +1,6 @@
 .vscode/
 .devcontainer/
-machine-code
+out/
 simulator
 translator
+lex.yy.c
