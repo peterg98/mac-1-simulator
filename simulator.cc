@@ -24,6 +24,7 @@ struct instruction
 
 const short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE};
 
+/* Decouples a binary instruction into a struct with their opcode and operand */
 instruction parse_instruction(short n)
 {
     instruction instr;
@@ -137,6 +138,8 @@ short decrement_sp(short x)
 {
     return stack_pointer -= x;
 }
+
+/* Simulates the program line by line, while printing out the contents of the registers. */
 
 int simulate()
 {

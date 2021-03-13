@@ -26,6 +26,9 @@ vector<string> lines;
 
 unordered_map<string, int> labels;
 
+/* Parses labels and translates them into binary,
+ * used for jumps and procedures
+ */
 int parse_labels()
 {
     int ntoken;
@@ -47,6 +50,10 @@ int parse_labels()
     }
     return 0;
 }
+
+/* Scans MAC-1 assembly and outputs a file containing binary equivalents
+ * in the out/ directory
+ */
 
 void scan(string in) {
     yyin = fopen(in.c_str(), "r");
