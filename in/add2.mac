@@ -1,0 +1,26 @@
+LOCO 1
+PUSH
+STOD 1
+LOCO 2
+PUSH
+LOCO 3
+PUSH
+LOCO 4
+PUSH
+LOCO 5
+PUSH
+
+LOCO 5
+STOD 10
+
+LOCO 0
+STOD 11
+
+loop: POP
+      ADDD 11
+      STOD 11
+      LODD 10
+      SUBD 1
+      STOD 10
+      JNZE loop
+LODD 10

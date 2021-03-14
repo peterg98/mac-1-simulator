@@ -69,22 +69,22 @@ short subtract(short x, short offset = 0)
 
 short jump_positive(short x)
 {
-    return accumulator >= 0 ? program_counter = x - 1 : program_counter;
+    return accumulator >= 0 ? program_counter = x - 1 : program_counter += 1;
 }
 
 short jump_zero(short x)
 {
-    return accumulator == 0 ? program_counter = x - 1 : program_counter;
+    return accumulator == 0 ? program_counter = x - 1 : program_counter += 1;
 }
 
 short jump_negative(short x)
 {
-    return accumulator < 0 ? program_counter = x - 1 : program_counter;
+    return accumulator < 0 ? program_counter = x - 1 : program_counter += 1;
 }
 
 short jump_nonzero(short x)
 {
-    return accumulator != 0 ? program_counter = x - 1 : program_counter;
+    return accumulator != 0 ? program_counter = x - 1 : program_counter += 1;
 }
 
 short jump(short x)

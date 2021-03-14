@@ -6,7 +6,9 @@ build: scanner.cc lex.yy.c
 	$(CC) simulator.cc -o simulator
 
 simulate: simulator.cc
-	./simulator out/test2
+	./simulator out/add1
+	./simulator out/add2
+	./simulator out/add3
 	
 lex.yy.c: scanner.l
 	flex scanner.l
