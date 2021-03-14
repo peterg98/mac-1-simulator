@@ -88,10 +88,10 @@ void scan(string in) {
                 else
                     operand = atoi(yytext);
 
-                lines.push_back(bitset<16>((short)(opcode) | operand).to_string());
+                lines.push_back(bitset<16>((unsigned short)(opcode) | operand).to_string());
             }
             else
-                lines.push_back(bitset<16>((short)opcode).to_string());
+                lines.push_back(bitset<16>((unsigned short)opcode).to_string());
         }
 
         ntoken = yylex();

@@ -6,26 +6,26 @@
 
 using namespace std;
 
-const short X_MASK = (1 << 12) - 1;
-const short Y_MASK = (1 << 8) - 1;
+const unsigned short X_MASK = (1 << 12) - 1;
+const unsigned short Y_MASK = (1 << 8) - 1;
 
-vector<int> lines;
+vector<unsigned short> lines;
 
 short memory[4095];
 
 short accumulator = 0;
-short stack_pointer = 4095;
-short program_counter = 0;
+unsigned short stack_pointer = 4095;
+unsigned short program_counter = 0;
 
 struct instruction
 {
-    short opcode, value;
+    unsigned short opcode, value;
 };
 
-const short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE};
+const unsigned short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE};
 
 /* Decouples a binary instruction into a struct with their opcode and operand */
-instruction parse_instruction(short n)
+instruction parse_instruction(unsigned short n)
 {
     instruction instr;
 
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
     string line;
     while (getline(src, line))
     {
-        lines.push_back((short)stoi(line, nullptr, 2));
+        lines.push_back((unsigned short)stoi(line, nullptr, 2));
     }
 
     simulate();
