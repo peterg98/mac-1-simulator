@@ -1,6 +1,6 @@
 .vscode/
 .devcontainer/
-out/*
+out/
 simulator
 translator
 lex.yy.c
