@@ -23,4 +23,4 @@ loop: POP
       SUBD 1
       STOD 10
       JNZE loop
-LODD 10
+LODD 11
