@@ -16,6 +16,8 @@ short memory[4095];
 short accumulator = 0;
 unsigned short stack_pointer = 4095;
 unsigned short program_counter = 0;
+unsigned short memory_address = 0;
+unsigned short memory_buffer = 0;
 
 struct instruction
 {
@@ -145,7 +147,11 @@ int simulate()
 {
     while (program_counter < lines.size())
     {
+        memory_address = program_counter;
+        memory_buffer = lines.at(program_counter);
+
         instruction instr = parse_instruction(lines.at(program_counter));
+
         switch (instr.opcode)
         {
         case 0:
@@ -221,12 +227,13 @@ int simulate()
             cout << "Unknown instruction: " << instr.value << endl;
         }
 
-        cout << "ac<-" << accumulator << ", sp<-" << stack_pointer << ", pc<-" << program_counter << endl;
-
         if (find(begin(NON_PC_INCR), end(NON_PC_INCR), instr.opcode) == end(NON_PC_INCR))
         {
             program_counter++;
         }
+
+        cout << "ac<-" << accumulator << ", sp<-" << stack_pointer << ", pc<-" << program_counter 
+            << ", mar<-" << memory_address << ", mbr<-" << memory_buffer << endl;
     }
 
     return 0;
