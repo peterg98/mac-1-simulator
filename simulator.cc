@@ -24,7 +24,7 @@ struct instruction
     unsigned short opcode, value;
 };
 
-const unsigned short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE};
+const unsigned short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE, SWAP_OPCODE};
 
 /* Decouples a binary instruction into a struct with their opcode and operand */
 instruction parse_instruction(unsigned short n)
