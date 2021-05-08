@@ -76,7 +76,7 @@ private:
     unsigned short PC_set(unsigned short value)
     {
         if (value == memory.size()) {
-            printf("End of program.");
+            printf("End of program. ");
             program_counter = value;
         } else {
             printf("Setting PC to %u... ", value);
@@ -231,7 +231,7 @@ instruction State::decode_instruction(unsigned short n)
 
 void State::execute_instruction(instruction instr)
 {
-    printf("Executing instruction in IR %d... ", program_counter - 1);
+    printf("Executing instruction in IR... ");
     print_state();
 
     switch (instr.opcode)
