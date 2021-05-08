@@ -1,6 +1,10 @@
 #include <stdio.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <vector>
 #include <algorithm>
 #include <bitset>
@@ -347,6 +351,14 @@ int simulate(State state)
 int main(int argc, char **argv)
 {
     ifstream src(argv[1]);
+
+    if (argc > 2 && argv[2] == "file") {
+        char buf[128];
+        sprintf(buf, "%s-output.txt", argv[1]);
+        int fd = open(buf, O_WRONLY | O_CREAT, 0644);
+
+        dup2(fd, 1);
+    }
 
     string line;
     vector<short> code;
