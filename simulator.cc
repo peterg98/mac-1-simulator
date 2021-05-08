@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <bitset>
 #include "constants.h"
 
 using namespace std;
@@ -18,6 +19,7 @@ unsigned short stack_pointer = 4095;
 unsigned short program_counter = 0;
 unsigned short memory_address = 0;
 unsigned short memory_buffer = 0;
+unsigned short instruction_register = 0;
 
 struct instruction
 {
@@ -149,8 +151,9 @@ int simulate()
     {
         memory_address = program_counter;
         memory_buffer = lines.at(program_counter);
+        instruction_register = memory_buffer;
 
-        instruction instr = parse_instruction(lines.at(program_counter));
+        instruction instr = parse_instruction(instruction_register);
 
         switch (instr.opcode)
         {
@@ -233,7 +236,8 @@ int simulate()
         }
 
         cout << "ac<-" << accumulator << ", sp<-" << stack_pointer << ", pc<-" << program_counter 
-            << ", mar<-" << memory_address << ", mbr<-" << memory_buffer << endl;
+            << ", mar<-" << memory_address << ", mbr<-" << memory_buffer << ", ir<-" << 
+            bitset<16>(instruction_register).to_string() << endl;
     }
 
     return 0;
