@@ -55,7 +55,8 @@ int parse_labels()
  * in the out/ directory
  */
 
-void scan(string in) {
+void scan(string in)
+{
     yyin = fopen(in.c_str(), "r");
     int ntoken;
     int curr_lineno = 1;
@@ -114,7 +115,8 @@ int main(int argc, char **argv)
 {
     string input_dir = "in";
 
-    for (const auto &entry: filesystem::directory_iterator(input_dir)) {
+    for (const auto &entry : filesystem::directory_iterator(input_dir))
+    {
         scan(entry.path());
     }
 

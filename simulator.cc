@@ -75,13 +75,24 @@ private:
     }
     unsigned short PC_set(unsigned short value)
     {
-        if (value == memory.size()) {
+        if (value == memory.size())
+        {
             printf("End of program. ");
             program_counter = value;
-        } else {
+        }
+        else
+        {
             printf("Setting PC to %u... ", value);
             program_counter = value;
         }
+        print_state();
+
+        return value;
+    }
+    unsigned short SP_set(unsigned short value)
+    {
+        printf("Setting SP to %u... ", value);
+        stack_pointer = value;
         print_state();
 
         return value;
@@ -146,14 +157,14 @@ private:
 
     short call_procedure(short x)
     {
-        stack_pointer -= 1;
+        SP_set(stack_pointer - 1);
         memory_set(stack_pointer, program_counter);
         return PC_set(CODE_SEGMENT_OFFSET + x - 1);
     }
 
     void push(bool indirect = false)
     {
-        stack_pointer -= 1;
+        SP_set(stack_pointer - 1);
 
         indirect ? memory[stack_pointer] =
                        memory_set(stack_pointer, memory_get(accumulator))
@@ -166,30 +177,30 @@ private:
         indirect ? memory[accumulator] =
                        memory_set(accumulator, memory_get(stack_pointer))
                  : AC_set(memory_get(stack_pointer));
-        stack_pointer += 1;
+        SP_set(stack_pointer + 1);
     }
 
     void _return()
     {
         PC_set(memory_get(stack_pointer));
-        stack_pointer += 1;
+        SP_set(stack_pointer + 1);
     }
 
     void swap_sp_pc()
     {
         short temp = stack_pointer;
-        stack_pointer = program_counter;
-        program_counter = temp;
+        SP_set(program_counter);
+        PC_set(temp);
     }
 
     short increment_sp(short y)
     {
-        return stack_pointer += y;
+        return SP_set(stack_pointer + y);
     }
 
     short decrement_sp(short y)
     {
-        return stack_pointer -= y;
+        return SP_set(stack_pointer - y);
     }
 };
 
