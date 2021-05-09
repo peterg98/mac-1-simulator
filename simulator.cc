@@ -44,7 +44,7 @@ public:
 private:
     void print_state()
     {
-        printf("ac<-%d, sp<- %u, pc<- %u, mar<-%u, mbr<-%u, ir<-%s\n", accumulator, stack_pointer,
+        printf("ac<-%d, sp<-%u, pc<-%u, mar<-%u, mbr<-%u, ir<-%s\n", accumulator, stack_pointer,
                program_counter, memory_address, memory_buffer, bitset<16>(instruction_register).to_string().c_str());
     }
 
