@@ -13,11 +13,19 @@
 
 using namespace std;
 
+/** Masks used to separate the opcode and operand in the instruction register. 
+ * Note that X_MASK is used for instructions that use 4 bits for opcode and 12 bits for operand,
+ * and Y_MASK is used for instructions INSP and DESP which use 8 bits for opcode and 8 for operand.
+*/
 const unsigned short X_MASK = (1 << 12) - 1;
 const unsigned short Y_MASK = (1 << 8) - 1;
 
+// The code is loaded directly into the code segment after the stack and heap memory which has a size of 4095 bytes.
 const unsigned short CODE_SEGMENT_OFFSET = 4095;
 
+/** Instead of incrementing the program counter, these instructions modify the program counter 
+ * directly by jumping to it. 
+*/
 const unsigned short NON_PC_INCR[] = {JPOS_OPCODE, JZER_OPCODE, JUMP_OPCODE, JNEG_OPCODE, JNZE_OPCODE, CALL_OPCODE, SWAP_OPCODE};
 
 struct instruction
@@ -335,8 +343,9 @@ void State::execute_instruction(instruction instr)
 
 bool State::_end() { return program_counter == memory.size(); }
 
-/* Simulates the program line by line, while printing out the contents of the registers. */
-
+/** Simulates the program until end of program, while printing out the contents of the registers
+ * at each instruction and at each memory fetch.
+ */
 int simulate(State state)
 {
     while (!state._end())
@@ -355,6 +364,7 @@ int main(int argc, char **argv)
 
     int fd;
 
+    // Specify the 'file' argument to redirect output to a file rather than printing to stdout.
     if (argc > 2 && strcmp(argv[2], "file") == 0) {
         char buf[128];
         sprintf(buf, "%s-output.txt", argv[1]);
