@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <iostream>
@@ -352,12 +353,17 @@ int main(int argc, char **argv)
 {
     ifstream src(argv[1]);
 
-    if (argc > 2 && argv[2] == "file") {
+    int fd;
+
+    if (argc > 2 && strcmp(argv[2], "file") == 0) {
         char buf[128];
         sprintf(buf, "%s-output.txt", argv[1]);
-        int fd = open(buf, O_WRONLY | O_CREAT, 0644);
+        fd = open(buf, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 
-        dup2(fd, 1);
+        if (dup2(fd, 1) == -1)
+        {
+            perror("dup failed");
+        }
     }
 
     string line;
@@ -371,4 +377,6 @@ int main(int argc, char **argv)
     State state = State(code);
 
     simulate(state);
+
+    close(fd);
 }
